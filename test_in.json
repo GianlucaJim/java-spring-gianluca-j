@@ -1,0 +1,230 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-06-16T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2025.1.0",
+  "resources": [
+    {
+      "_id": "wrk_001",
+      "_type": "workspace",
+      "name": "Spring Boot API - Final Setup",
+      "description": "",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_001",
+      "_type": "environment",
+      "parentId": "wrk_001",
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "http://localhost:8080/",
+        "token": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBkZW1vLmNvbSIsImlhdCI6MTc1MDA0ODU5MSwiZXhwIjoxNzUwMTM0OTkxfQ.WHf-acsbV7WajzfcuF4OI72lzbPdcVmnda5xyLK569Q"
+      },
+      "isPrivate": false,
+      "metaSortKey": 0
+    },
+    {
+      "_id": "jar_001",
+      "_type": "cookie_jar",
+      "parentId": "wrk_001",
+      "name": "Default Jar",
+      "cookies": []
+    },
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_001",
+      "name": "Auth"
+    },
+    {
+      "_id": "req_login",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Login",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}auth/login",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@demo.com\",\n  \"password\": \"admin123\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "fld_products",
+      "_type": "request_group",
+      "parentId": "wrk_001",
+      "name": "Products"
+    },
+    {
+      "_id": "req_get_products",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Get all Products",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}products",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_create_product",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Create Product",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}products",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Laptop\",\n  \"description\": \"High-end gaming laptop\",\n  \"price\": 1500,\n  \"quantity\": 10,\n  \"category\": { \"id\": 1 }\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "fld_categories",
+      "_type": "request_group",
+      "parentId": "wrk_001",
+      "name": "Categories"
+    },
+    {
+      "_id": "req_get_categories",
+      "_type": "request",
+      "parentId": "fld_categories",
+      "name": "Get all Categories",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}categories",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_create_category",
+      "_type": "request",
+      "parentId": "fld_categories",
+      "name": "Create Category",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}categories",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Electronics\",\n  \"description\": \"Electronic devices\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_658d56bbb54242deb1c16e82",
+      "_type": "request",
+      "parentId": "fld_categories",
+      "name": "Update Category",
+      "method": "PUT",
+      "url": "{{ _.baseUrl }}categories/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Updated Electronics\",\n  \"description\": \"Updated description\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_f349b1592ca842308eb45624",
+      "_type": "request",
+      "parentId": "fld_categories",
+      "name": "Delete Category",
+      "method": "DELETE",
+      "url": "{{ _.baseUrl }}categories/1",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_87ebc260c51e4f3b9f94a5d0",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Update Product",
+      "method": "PUT",
+      "url": "{{ _.baseUrl }}products/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Updated Laptop\",\n  \"description\": \"Updated gaming laptop\",\n  \"price\": 1600,\n  \"quantity\": 8,\n  \"category\": { \"id\": 1 }\n}"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_2aaf3c64fdc241a7bdca96a5",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Delete Product",
+      "method": "DELETE",
+      "url": "{{ _.baseUrl }}products/1",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    }
+  ]
+}
