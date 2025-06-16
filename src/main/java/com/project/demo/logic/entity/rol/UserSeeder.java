@@ -9,14 +9,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-@Order(3)
-public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
+@Order(2)
+public class UserSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public AdminSeeder(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserSeeder(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -24,17 +24,17 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        if (userRepository.findByEmail("admin@demo.com").isEmpty()) {
-            Role adminRole = roleRepository.findByName(RoleEnum.SUPER_ADMIN).orElseThrow();
+        if (userRepository.findByEmail("user@demo.com").isEmpty()) {
+            Role userRole = roleRepository.findByName(RoleEnum.USER).orElseThrow();
 
-            User admin = new User();
-            admin.setName("Admin");
-            admin.setLastname("User");
-            admin.setEmail("admin@demo.com");
-            admin.setPassword(passwordEncoder.encode("admin123"));
-            admin.setRole(adminRole);
+            User user = new User();
+            user.setName("Regular");
+            user.setLastname("User");
+            user.setEmail("user@demo.com");
+            user.setPassword(passwordEncoder.encode("user123"));
+            user.setRole(userRole);
 
-            userRepository.save(admin);
+            userRepository.save(user);
         }
     }
 }
